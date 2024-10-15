@@ -1,0 +1,26 @@
+{
+  "name": "three-magic-balls",
+  "version": "0.0.1",
+  "description": "Simple Simple app for learning vanilla JavaScript",
+  "scripts": {
+    "start": "node ./src/server/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caffellatte/three-magic-balls.git"
+  },
+  "keywords": [
+    "backbone",
+    "underscore",
+    "js"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/caffellatte/three-magic-balls/issues"
+  },
+  "homepage": "https://github.com/caffellatte/three-magic-balls#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
