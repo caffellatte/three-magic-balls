@@ -1,0 +1,9 @@
+body {
+  font-family: Arial, sans-serif;
+}
+#app {
+  margin: 20px;
+}
+.item {
+  margin-bottom: 10px;
+}
