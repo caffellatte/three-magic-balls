@@ -1,28 +1,28 @@
 // public/app.js
 
 // Define a Todo model
-var Todo = Backbone.Model.extend({
+var Ball = Backbone.Model.extend({
   defaults: {
     title: "",
-    completed: false,
+    status: "", // dotted dashed solid
   },
 });
 
 // Define a collection of Todos
-var TodoList = Backbone.Collection.extend({
-  model: Todo,
-  url: "/api/todos", // URL for fetching todos from the server
+var BallList = Backbone.Collection.extend({
+  model: Ball,
 });
 
 // Define a view for individual Todo items
-var TodoView = Backbone.View.extend({
+var BallView = Backbone.View.extend({
   tagName: "div",
-  className: "item",
+  className: "ball",
 
   template: _.template("<span><%= title %></span>"),
 
   events: {
-    click: "toggleCompleted",
+    click: "toggle",
+    dblclick: "reset",
   },
 
   initialize: function () {
@@ -35,9 +35,35 @@ var TodoView = Backbone.View.extend({
     return this;
   },
 
-  toggleCompleted: function () {
-    this.model.set("completed", !this.model.get("completed"));
-    this.$el.toggleClass("completed", this.model.get("completed"));
+  reset: function () {
+    var currentStatus = this.model.get("status");
+    this.$el.removeClass(currentStatus);
+
+    this.model.set("status", "");
+  },
+
+  toggle: function () {
+    var currentStatus = this.model.get("status");
+    var newStatus = "";
+
+    switch (currentStatus) {
+      case "":
+        newStatus = "dotted";
+        break;
+      case "dotted":
+        newStatus = "dashed";
+        break;
+      case "dashed":
+        newStatus = "solid";
+        break;
+      case "solid":
+        newStatus = "dotted";
+        break;
+    }
+
+    this.model.set("status", newStatus);
+    this.$el.removeClass(currentStatus);
+    this.$el.addClass(newStatus);
   },
 });
 
@@ -46,27 +72,24 @@ var AppView = Backbone.View.extend({
   el: "#app",
 
   events: {
-    "click #add-todo": "addTodo",
+    "click #add-ball": "addBall",
   },
 
   initialize: function () {
-    this.input = this.$("#new-todo");
-    this.list = this.$("#todo-list");
-    this.todos = new TodoList();
-    this.listenTo(this.todos, "add", this.renderTodo);
-    this.todos.fetch(); // Fetch todos from the server on initialization
+    this.list = this.$("#ball-list");
+    this.balls = new BallList();
+    this.listenTo(this.balls, "add", this.renderBall);
   },
 
-  addTodo: function () {
-    var title = this.input.val().trim();
+  addBall: function () {
+    var title = Math.round(Math.random() * 100).toString();
     if (title) {
-      this.todos.add(new Todo({ title: title }));
-      this.input.val("");
+      this.balls.add(new Ball({ title: title }));
     }
   },
 
-  renderTodo: function (todo) {
-    var view = new TodoView({ model: todo });
+  renderBall: function (ball) {
+    var view = new BallView({ model: ball });
     this.list.append(view.el);
   },
 });

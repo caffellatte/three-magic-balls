@@ -1,9 +1,29 @@
 body {
   font-family: Arial, sans-serif;
 }
+
 #app {
   margin: 20px;
 }
-.item {
-  margin-bottom: 10px;
+
+.ball {
+  width: 200px; /* Set the width */
+  height: 200px; /* Set the height */
+  background-color: lightblue; /* Background color of the circle */
+  border-radius: 50%; /* Make it a circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dotted {
+  border-style: dotted;
+}
+
+.dashed {
+  border-style: dashed;
+}
+
+.solid {
+  border-style: solid;
 }
