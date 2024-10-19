@@ -6,6 +6,12 @@ body {
   margin: 20px;
 }
 
+#ball-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .ball {
   width: 200px; /* Set the width */
   height: 200px; /* Set the height */
